@@ -44,31 +44,32 @@ function createMetaItem(pageMap: typeof apiPageMap): MetaJsonFile {
 
 export const getEnhancedPageMap: typeof getPageMap = async (...args) => {
   const rootPageMap = await getPageMap(...args)
-  const modifiedPageMap = visitPageMap(rootPageMap, item => {
-    if ('route' in item) {
-      // if (item.route === '/api') {
-      //   return {
-      //     ...item,
-      //     children: [
-      //       createMetaItem(apiPageMap),
-      //       {
-      //         route: '/api',
-      //         name: 'index',
-      //         title: 'Overview'
-      //       },
-      //       ...apiPageMap
-      //     ]
-      //   }
-      // }
-      // if (item.route === '/docs/built-ins') {
-      //   return {
-      //     ...item,
-      //     children: [createMetaItem(builtInsPageMap), ...builtInsPageMap]
-      //   }
-      // }
-    }
-    return item
-  })
+  // const modifiedPageMap = visitPageMap(rootPageMap, item => {
+  //   if ('route' in item) {
+  //     // if (item.route === '/api') {
+  //     //   return {
+  //     //     ...item,
+  //     //     children: [
+  //     //       createMetaItem(apiPageMap),
+  //     //       {
+  //     //         route: '/api',
+  //     //         name: 'index',
+  //     //         title: 'Overview'
+  //     //       },
+  //     //       ...apiPageMap
+  //     //     ]
+  //     //   }
+  //     // }
+  //     // if (item.route === '/docs/built-ins') {
+  //     //   return {
+  //     //     ...item,
+  //     //     children: [createMetaItem(builtInsPageMap), ...builtInsPageMap]
+  //     //   }
+  //     // }
+  //   }
+  //   return item
+  // })
 
-  return modifiedPageMap
+  return rootPageMap
+  // return modifiedPageMap
 }

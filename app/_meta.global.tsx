@@ -85,26 +85,24 @@ const BLOG_THEME: MetaRecord = {
 export default {
   index: {
     type: 'page',
-    display: 'hidden'
+    display: 'hidden',
   },
   docs: {
- 
+    type: 'page',
+    title: 'Documentation',
     items: {
       index: '',
- 
       guide: { items: GUIDE },
- 
-    }
+    },
   },
- 
+
   showcase: {
     type: 'page',
     theme: {
       typesetting: 'article',
       layout: 'full',
       timestamp: false,
-      toc: false
-    }
+      toc: false,
+    },
   },
- 
 }

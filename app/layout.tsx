@@ -95,6 +95,7 @@ const RootLayout: FC<{
   children: ReactNode
 }> = async ({ children }) => {
   const pageMap = await getEnhancedPageMap()
+  console.log('PAGE MAP:', pageMap)
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>
       <Head />
