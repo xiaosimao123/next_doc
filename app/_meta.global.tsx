@@ -22,43 +22,42 @@ const ExternalLink: FC<{ children: ReactNode }> = ({ children }) => {
 const FILE_CONVENTIONS: MetaRecord = {
   _: {
     type: 'separator',
-    title: 'Files'
+    title: 'Files',
   },
   'page-file': 'page.mdx',
   'meta-file': '_meta.js',
   _2: {
     href: 'https://nextjs.org/docs/app/api-reference/file-conventions/page',
-    title: <ExternalLink>page.jsx</ExternalLink>
+    title: <ExternalLink>page.jsx</ExternalLink>,
   },
   _3: {
     href: 'https://nextjs.org/docs/app/api-reference/file-conventions/layout',
-    title: <ExternalLink>layout.jsx</ExternalLink>
+    title: <ExternalLink>layout.jsx</ExternalLink>,
   },
   _4: {
     type: 'separator',
-    title: 'Top-Level Files'
+    title: 'Top-Level Files',
   },
   'mdx-components-file': 'mdx-components.js',
   _5: {
     type: 'separator',
-    title: 'Top-Level Folders'
+    title: 'Top-Level Folders',
   },
   'content-directory': 'content',
   'src-directory': 'src',
   _6: {
     href: 'https://nextjs.org/docs/app/getting-started/installation?utm_source=nextra.site&utm_medium=referral&utm_campaign=sidebar#create-the-app-directory',
-    title: <ExternalLink>app</ExternalLink>
+    title: <ExternalLink>app</ExternalLink>,
   },
   _7: {
     href: 'https://nextjs.org/docs/app/building-your-application/optimizing/static-assets?utm_source=nextra.site&utm_medium=referral&utm_campaign=sidebar',
-    title: <ExternalLink>public</ExternalLink>
-  }
+    title: <ExternalLink>public</ExternalLink>,
+  },
 }
 
 const GUIDE: MetaRecord = {
- 
+  demo: '',
   'syntax-highlighting': '',
- 
 }
 
 const ADVANCED: MetaRecord = {

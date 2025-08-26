@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
+    "dev": "next dev",
+    "build_docs": "next build",
+    "build": "turbo run build --filter=./packages/\\*",
     "start": "next start",
     "lint": "next lint"
   },
@@ -12,14 +13,17 @@
     "clsx": "^2.1.0",
     "framer-motion": "^12.0.0",
     "next": "15.5.0",
-    "nextra": "^4.3.0",
-    "nextra-theme-docs": "^4.3.0",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "tsup": "8.4.0",
+    "tsx": "4.20.3",
+    "nextra": "4.3.0",
+    "nextra-theme-docs": "4.3.0",
+    "typescript": "5.8.3"
   },
   "devDependencies": {
-    "@svgr/webpack": "^8.0.1",
     "@eslint/eslintrc": "^3",
+    "@svgr/webpack": "^8.0.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
@@ -27,6 +31,8 @@
     "eslint": "^9",
     "eslint-config-next": "15.4.6",
     "tailwindcss": "^4",
+    "turbo": "2.5.5",
     "typescript": "^5"
-  }
+  },
+  "packageManager": "pnpm@10.15.0+sha512.486ebc259d3e999a4e8691ce03b5cac4a71cbeca39372a9b762cb500cfdf0873e2cb16abe3d951b1ee2cf012503f027b98b6584e4df22524e0c7450d9ec7aa7b"
 }

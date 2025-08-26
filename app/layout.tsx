@@ -4,7 +4,7 @@ import cn from 'clsx'
 import type { Metadata } from 'next'
 import NextImage from 'next/image'
 import { Footer, Layout, Link, Navbar } from 'nextra-theme-docs'
-import { Anchor, Banner, Head } from 'nextra/components'
+import { Banner, Head } from 'nextra/components'
 import type { FC, ReactNode } from 'react'
 import xyflow from './showcase/_logos/xyflow.png'
 import './globals.css'
@@ -95,7 +95,7 @@ const RootLayout: FC<{
   children: ReactNode
 }> = async ({ children }) => {
   const pageMap = await getEnhancedPageMap()
-  console.log('PAGE MAP:', pageMap)
+  // console.log('PAGE MAP:', pageMap)
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>
       <Head />
@@ -112,13 +112,13 @@ const RootLayout: FC<{
             extraContent: (
               <>
                 <b className="mt-2 text-xs">Sponsored by:</b>
-                <Anchor href="https://xyflow.com?utm_source=nextra.site&utm_campaign=nextra&utm_content=sidebarLink">
+                {/* <Anchor href="https://xyflow.com?utm_source=nextra.site&utm_campaign=nextra&utm_content=sidebarLink">
                   <NextImage
                     src={xyflow}
                     alt="Wire your ideas with xyflow!"
                     className="nextra-border rounded-sm border"
                   />
-                </Anchor>
+                </Anchor> */}
               </>
             ),
           }}

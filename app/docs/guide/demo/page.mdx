@@ -1,0 +1,525 @@
+import { FileTree } from 'nextra/components'
+import { ExampleCode } from '../../../../components/example-code.tsx'
+import { Steps } from 'nextra/components'
+import InstallNextraTheme from '@components/install-nextra-theme.mdx'
+import ReadyToGo from '@components/ready-to-go.mdx'
+import { OptionTable } from '@components/_table'
+import { compileMdx } from 'nextra/compile'
+import { MDXRemote } from 'nextra/mdx-remote'
+
+
+# demo
+
+test
+
+## FileTree
+<FileTree>
+  <FileTree.Folder name="app" open>
+    <FileTree.File name="layout.jsx" />
+    <FileTree.File name="page.jsx" active />
+    <FileTree.Folder name="docs" open>
+      <FileTree.File name="page.mdx" active />
+      <FileTree.Folder name="getting-started" open>
+        <FileTree.File name="page.mdx" active />
+      </FileTree.Folder>
+    </FileTree.Folder>
+  </FileTree.Folder>
+</FileTree>
+
+
+## Usage
+
+```md filename="Markdown"
+> [!NOTE]
+>
+> Useful information that users should know, even when skimming content.
+
+> [!TIP]
+>
+> Helpful advice for doing things better or more easily.
+
+> [!IMPORTANT]
+>
+> Key information users need to know to achieve their goal.
+
+> [!WARNING]
+>
+> Urgent info that needs immediate user attention to avoid problems.
+
+> [!CAUTION]
+>
+> Advises about risks or negative outcomes of certain actions.
+```
+
+## Example
+
+> [!NOTE]
+>
+> Useful information that users should know, even when skimming content.
+
+> [!TIP]
+>
+> Helpful advice for doing things better or more easily.
+
+> [!IMPORTANT]
+>
+> Key information users need to know to achieve their goal.
+
+> [!WARNING]
+>
+> Urgent info that needs immediate user attention to avoid problems.
+
+> [!CAUTION]
+>
+> Advises about risks or negative outcomes of certain actions.
+
+
+## Steps
+<Steps>
+### Install
+
+To create a Nextra Docs site manually, you have to install **Next.js**,
+**React**, **Nextra**, and **Nextra Docs Theme**. In your project directory, run
+the following command to install the dependencies:
+
+```sh npm2yarn
+npm i next react react-dom nextra nextra-theme-docs
+```
+
+> [!NOTE]
+>
+> If you already have Next.js installed in your project, you only need to
+> install `nextra` and `nextra-theme-docs` as the add-ons.
+
+<InstallNextraTheme />
+
+```jsx filename="app/layout.jsx"
+import { Footer, Layout, Navbar } from 'nextra-theme-docs'
+import { Banner, Head } from 'nextra/components'
+import { getPageMap } from 'nextra/page-map'
+import 'nextra-theme-docs/style.css'
+
+export const metadata = {
+  // Define your metadata here
+  // For more information on metadata API, see: https://nextjs.org/docs/app/building-your-application/optimizing/metadata
+}
+
+const banner = <Banner storageKey="some-key">Nextra 4.0 is released 🎉</Banner>
+const navbar = (
+  <Navbar
+    logo={<b>Nextra</b>}
+    // ... Your additional navbar options
+  />
+)
+const footer = <Footer>MIT {new Date().getFullYear()} © Nextra.</Footer>
+
+export default async function RootLayout({ children }) {
+  return (
+    <html
+      // Not required, but good for SEO
+      lang="en"
+      // Required to be set
+      dir="ltr"
+      // Suggested by `next-themes` package https://github.com/pacocoursey/next-themes#with-app
+      suppressHydrationWarning
+    >
+      <Head
+      // ... Your additional head options
+      >
+        {/* Your additional tags should be passed as `children` of `<Head>` element */}
+      </Head>
+      <body>
+        <Layout
+          banner={banner}
+          navbar={navbar}
+          pageMap={await getPageMap()}
+          docsRepositoryBase="https://github.com/shuding/nextra/tree/main/docs"
+          footer={footer}
+          // ... Your additional layout options
+        >
+          {children}
+        </Layout>
+      </body>
+    </html>
+  )
+}
+```
+
+<ReadyToGo />
+
+</Steps>
+
+See the [File Conventions](/docs/file-conventions) for more details on
+organizing your documentation structure, and check out the
+[Layout Component](/docs/docs-theme/built-ins/layout) for configuring the docs
+site's theme.
+
+
+## FAQ
+
+The Nextra FAQ is a collection of useful questions and answers about the
+project. If you have a question that isn't answered here, please
+[open a discussion](https://github.com/shuding/nextra/discussions).
+
+<details>
+  {/* prettier-ignore */}
+  <summary>Can I use Nextra with Next.js `pages` router?</summary>
+Nextra 4 only works with the `app` router. Only Nextra 1/2/3 supports the
+`pages` router.
+
+</details>
+
+<details>
+  <summary>Can I use X with Nextra?</summary>
+The answer is "yes" for most things. Since Nextra is just a Next.js plugin, almost all the things
+that can be done with React can be done with Nextra. Here are some examples and guides:
+
+- [Use Tailwind CSS](/docs/guide/tailwind-css)
+- [Use custom CSS and Sass](/docs/guide/custom-css)
+- [Use custom fonts](https://nextjs.org/docs/basic-features/font-optimization)
+
+</details>
+
+## GitHub Flavored Markdown
+
+[GFM](https://github.github.com/gfm) is an extension of Markdown, created by
+GitHub, that adds support for strikethrough, task lists, tables, and more.
+
+### Strikethrough
+
+~~removed~~
+
+```md filename="Markdown"
+~~removed~~
+```
+
+### Task list
+
+- [x] Write the press release
+- [ ] Update the website
+- [ ] Contact the media
+
+```md filename="Markdown"
+- [x] Write the press release
+- [ ] Update the website
+- [ ] Contact the media
+```
+
+### Table
+
+| Syntax        | Description |   Test Text |
+| :------------ | :---------: | ----------: |
+| Header        |    Title    | Here's this |
+| Paragraph     |    Text     |    And more |
+| Strikethrough |             |    ~~Text~~ |
+
+```md filename="Markdown"
+| Syntax        | Description |   Test Text |
+| :------------ | :---------: | ----------: |
+| Header        |    Title    | Here's this |
+| Paragraph     |    Text     |    And more |
+| Strikethrough |             |    ~~Text~~ |
+```
+
+### Autolinks
+
+Visit https://nextjs.org.
+
+```md
+Visit https://nextjs.org.
+```
+
+### Custom heading id
+
+You can specify custom heading id using the format `## My heading [#custom-id]`.
+For example:
+
+```md filename="Markdown"
+## Long heading about Nextra [#about-nextra]
+```
+
+In this example, `#about-nextra` will be used as the heading link, replacing the
+default `#long-heading-about-nextra`.
+
+## Syntax Highlighting
+
+### Inlined code
+
+Inlined syntax highlighting like `let x = 1{:jsx}` is also supported via the
+`{:}` syntax:
+
+```md copy=false filename="Markdown"
+Inlined syntax highlighting is also supported `let x = 1{:jsx}` via:
+```
+
+### Highlighting lines
+
+You can highlight specific lines of code by adding a `{}` attribute to the code
+block:
+
+````md copy=false filename="Markdown"
+```js {1,4-5}
+import { useState } from 'react'
+
+function Counter() {
+  const [count, setCount] = useState(0)
+  return <button onClick={() => setCount(count + 1)}>{count}</button>
+}
+```
+````
+
+Result:
+
+```js copy=false {1,4-5}
+import { useState } from 'react'
+
+function Counter() {
+  const [count, setCount] = useState(0)
+  return <button onClick={() => setCount(count + 1)}>{count}</button>
+}
+```
+
+### Highlighting substrings
+
+You can highlight specific substrings of code by adding a `//` attribute to the
+code block:
+
+````md copy=false filename="Markdown"
+```js /useState/
+import { useState } from 'react'
+
+function Counter() {
+  const [count, setCount] = useState(0)
+  return <button onClick={() => setCount(count + 1)}>{count}</button>
+}
+```
+````
+
+```js copy=false /useState/
+import { useState } from 'react'
+
+function Counter() {
+  const [count, setCount] = useState(0)
+  return <button onClick={() => setCount(count + 1)}>{count}</button>
+}
+```
+
+You can highlight only a part of the occurrences of that substring by adding a
+number it: `/str/1`, or multiple: `/str/1-3`, `/str/1,3`.
+
+### Copy button
+
+By adding a `copy` attribute, a copy button will be added to the code block when
+the user hovers over it:
+
+````md copy=false filename="Markdown"
+```js copy
+console.log('hello, world')
+```
+````
+
+Renders:
+
+```js copy
+console.log('hello, world')
+```
+
+> [!NOTE]
+>
+>  You can enable this feature globally by setting `defaultShowCopyCode: true` in
+>  your Nextra configuration (`next.config.mjs` file). Once it's enabled
+>  globally, you can disable it via the `copy=false` attribute.
+
+### Line numbers
+
+You can add line numbers to your code blocks by adding a `showLineNumbers`
+attribute:
+
+````md copy=false filename="Markdown"
+```js showLineNumbers
+import { useState } from 'react'
+
+function Counter() {
+  const [count, setCount] = useState(0)
+  return <button onClick={() => setCount(count + 1)}>{count}</button>
+}
+```
+````
+
+Renders:
+
+```js copy=false showLineNumbers
+import { useState } from 'react'
+
+function Counter() {
+  const [count, setCount] = useState(0)
+  return <button onClick={() => setCount(count + 1)}>{count}</button>
+}
+```
+
+### Filenames and titles
+
+You can add a filename or a title to your code blocks by adding a `filename`
+attribute:
+
+````md copy=false filename="Markdown"
+```js filename="example.js"
+console.log('hello, world')
+```
+````
+
+Renders:
+
+```js copy=false filename="example.js"
+console.log('hello, world')
+```
+
+### ANSI highlighting
+
+You can highlight ANSI escape codes:
+
+<ANSI />
+
+export async function ANSI() {
+  const rawAnsi = `\`\`\`ansi
+[0m [0;32m✓[0m [0;2msrc/[0mindex[0;2m.test.ts (1)[0m
+  [0;2m Test Files [0m [0;1;32m1 passed[0;98m (1)[0m
+  [0;2m      Tests [0m [0;1;32m1 passed[0;98m (1)[0m
+  [0;2m   Start at [0m 23:32:41
+  [0;2m   Duration [0m 11ms
+  [42;1;39;0m PASS [0;32m Waiting for file changes...[0m
+         [0;2mpress [0;1mh[0;2m to show help, press [0;1mq[0;2m to quit
+\`\`\``
+  const rawJs = await compileMdx(`~~~md filename="Markdown"
+${rawAnsi}
+~~~
+
+Renders:
+
+${rawAnsi}
+`)
+  return <MDXRemote compiledSource={rawJs} />
+}
+
+## Supported languages
+
+Check [this list](https://github.com/shikijs/shiki/blob/main/docs/languages.md)
+for all supported languages.
+
+{/* ## Customize the Theme */}
+
+{/* Nextra uses CSS variables to define the colors for tokens. */}
+
+## With dynamic content
+
+Since syntax highlighting is done at build time, you can't use dynamic content
+in your code blocks. However, since MDX is very powerful there is a workaround
+via client JS. For example:
+
+import { DynamicCode } from './_dynamic-code'
+
+<DynamicCode>
+```js copy=false filename="dynamic-code.js"
+function hello() {
+  const x = 2 + 3
+  console.log(1)
+}
+```
+</DynamicCode>
+
+This workaround has a limitation that updated content won't be re-highlighted.
+For example if we update the number to `1 + 1`, it will be incorrectly
+highlighted.
+
+Check out the
+[code](https://github.com/shuding/nextra/blob/main/docs/app/docs/guide/syntax-highlighting/_dynamic-code.tsx)
+to see how it works.
+
+## Disable syntax highlighting
+
+You can opt out of syntax highlighting for using one of your own. You can
+disable syntax highlighting globally by setting `codeHighlight: false` in your
+Nextra configuration (`next.config.mjs` file).
+
+<OptionTable
+  options={[
+    [
+      'codeHighlight',
+      'boolean',
+      'Enable or disable syntax highlighting. Defaults to `true`.'
+    ]
+  ]}
+/>
+
+## Custom grammar
+
+Shiki accepts a
+[VSCode TextMate Grammar](https://code.visualstudio.com/api/language-extensions/syntax-highlight-guide)
+for syntax highlighting with custom language grammars.
+
+You can provide these grammars by overriding the `getHighlighter` function in
+`mdxOptions.rehypePrettyCodeOptions` option in your Nextra config inside
+`next.config.mjs`:
+
+```js copy=false filename="next.config.mjs" {13-18}
+import { BUNDLED_LANGUAGES } from 'shiki'
+
+nextra({
+  // ... other Nextra config options
+  mdxOptions: {
+    rehypePrettyCodeOptions: {
+      getHighlighter: options =>
+        getHighlighter({
+          ...options,
+          langs: [
+            ...BUNDLED_LANGUAGES,
+            // custom grammar options, see the Shiki documentation for how to provide these options
+            {
+              id: 'my-lang',
+              scopeName: 'source.my-lang',
+              aliases: ['mylang'], // Along with id, aliases will be included in the allowed names you can use when writing Markdown
+              path: '../../public/syntax/grammar.tmLanguage.json'
+            }
+          ]
+        })
+    }
+  }
+})
+```
+
+## Custom themes
+
+Within `mdxOptions.rehypePrettyCodeOptions` you may also provide custom themes
+instead of [relying on CSS Variables](/docs/guide/syntax-highlighting):
+
+```js copy=false filename="next.config.mjs" {4}
+nextra({
+  // ... other Nextra config options
+  mdxOptions: {
+    rehypePrettyCodeOptions: {
+      // VSCode theme or built-in Shiki theme, see Shiki documentation for more information
+      theme: JSON.parse(
+        readFileSync('./public/syntax/arctis_light.json', 'utf8')
+      )
+    }
+  }
+})
+```
+
+### Multiple themes (dark and light mode)
+
+Pass your themes to `theme`, where the keys represent the color mode:
+
+```js copy=false filename="next.config.mjs" {5-8}
+nextra({
+  // ... other Nextra config options
+  mdxOptions: {
+    rehypePrettyCodeOptions: {
+      theme: {
+        dark: 'nord',
+        light: 'min-light'
+      }
+    }
+  }
+})
+```
