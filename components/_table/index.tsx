@@ -1,8 +1,8 @@
 import type { FC } from 'react'
 import styles from './style.module.css'
-
-export const OptionTable: FC<{ options: [string, string, any] }> = ({
-  options
+ 
+export const OptionTable: FC<{ options: [string, string, string] }> = ({
+  options,
 }) => {
   return (
     <div

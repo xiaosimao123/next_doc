@@ -29,18 +29,18 @@ function visitPageMap(
   return visitor(pageMap)
 }
 
-function createMetaItem(pageMap: typeof apiPageMap): MetaJsonFile {
-  return {
-    data: Object.fromEntries(
-      pageMap.map(o => {
-        if ('type' in o && o.type === 'separator') {
-          return [o.name, { type: 'separator', title: o.title }]
-        }
-        return [o.name, '']
-      })
-    )
-  }
-}
+// function createMetaItem(pageMap: typeof apiPageMap): MetaJsonFile {
+//   return {
+//     data: Object.fromEntries(
+//       pageMap.map(o => {
+//         if ('type' in o && o.type === 'separator') {
+//           return [o.name, { type: 'separator', title: o.title }]
+//         }
+//         return [o.name, '']
+//       })
+//     )
+//   }
+// }
 
 export const getEnhancedPageMap: typeof getPageMap = async (...args) => {
   const rootPageMap = await getPageMap(...args)

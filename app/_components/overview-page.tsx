@@ -28,7 +28,6 @@ export const OverviewPage: FC<{
             )
           }
           return (
-            // @ts-expect-error -- fixme
             <Cards.Card
               key={item.name}
               // @ts-expect-error -- fixme

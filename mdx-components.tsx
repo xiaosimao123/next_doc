@@ -1,9 +1,17 @@
 import { getEnhancedPageMap } from '@components/get-page-map'
 import type { Folder } from 'nextra'
 import { useMDXComponents as getDocsMDXComponents } from 'nextra-theme-docs'
-import type { UseMDXComponents } from 'nextra/mdx-components'
+ 
 import { generateDefinition, TSDoc } from 'nextra/tsdoc'
-import type { ComponentProps } from 'react'
+import type { ComponentProps, FC, HTMLAttributes } from 'react'
+import * as nextra from 'nextra'
+import * as nextra_mdx_components_pre_index from 'nextra/mdx-components/pre/index'
+import * as react_jsx_runtime from 'react/jsx-runtime'
+import * as url from 'url'
+import * as react from 'react'
+
+import * as next_image from 'next/image'
+import { UseMDXComponents } from 'nextra/mdx-components'
 
 type TSDocProps = ComponentProps<typeof TSDoc>
 type GenerateDefinitionArgs = Parameters<typeof generateDefinition>[0]
@@ -18,9 +26,9 @@ interface APIDocsProps
 
 const { img: Image, ...docsComponents } = getDocsMDXComponents({
   // @ts-expect-error -- FIXME
-  figure: props => <figure className="mt-[1.25em]" {...props} />,
+  figure: (props) => <figure className="mt-[1.25em]" {...props} />,
   // @ts-expect-error -- FIXME
-  figcaption: props => (
+  figcaption: (props) => (
     <figcaption className="mt-2 text-center text-sm" {...props} />
   ),
   async APIDocs({
@@ -52,12 +60,7 @@ export default $`
     } else {
       code = $code
     }
-    const definition =
-      $definition ??
-      generateDefinition(
-        // @ts-expect-error -- exist
-        { code, flattened }
-      )
+    const definition = $definition ?? generateDefinition({ code, flattened })
 
     // TODO pass `'/api'` as first argument
     const pageMap = await getEnhancedPageMap()
@@ -71,9 +74,9 @@ export default $`
         typeLinkMap={{
           ...Object.fromEntries(
             apiPageMap
-              .filter(o => 'route' in o && o.name !== 'index')
+              .filter((o) => 'route' in o && o.name !== 'index')
               // @ts-expect-error -- fixme
-              .map(o => [o.title, o.route])
+              .map((o) => [o.title, o.route])
           ),
           NextConfig:
             'https://nextjs.org/docs/pages/api-reference/config/next-config-js',
@@ -104,23 +107,237 @@ export default $`
           MDXComponents:
             'https://github.com/DefinitelyTyped/DefinitelyTyped/blob/4c3811099cbe9ee60151c11a679b780d0ba785bf/types/mdx/types.d.ts#L65',
           ComboboxInputProps:
-            'https://github.com/tailwindlabs/headlessui/blob/0933dd5e5f563675c8a36e4520905bf9b58df00e/packages/%40headlessui-react/src/components/combobox/combobox.tsx#L506'
+            'https://github.com/tailwindlabs/headlessui/blob/0933dd5e5f563675c8a36e4520905bf9b58df00e/packages/%40headlessui-react/src/components/combobox/combobox.tsx#L506',
         }}
       />
     )
-  }
+  },
 })
 
-export const useMDXComponents: UseMDXComponents<typeof docsComponents> = <T,>(
+export const useMDXComponents: UseMDXComponents<any> = <T,>(
   components?: T
 ) => ({
   ...docsComponents,
   // @ts-expect-error -- FIXME
-  img: props => (
+  img: (props) => (
     <Image
       {...props}
       className="nextra-border rounded-xl border drop-shadow-sm"
     />
   ),
-  ...components
+  ...components,
 })
+// const DEFAULT_COMPONENTS: {
+//   img: FC<next_image.ImageProps>
+//   a: FC<
+//     Omit<
+//       Omit<
+//         Omit<
+//           react.AnchorHTMLAttributes<HTMLAnchorElement>,
+//           keyof {
+//             href: string | url.UrlObject
+//             as?: string | url.UrlObject
+//             replace?: boolean
+//             scroll?: boolean
+//             shallow?: boolean
+//             passHref?: boolean
+//             prefetch?: boolean | null
+//             locale?: string | false
+//             legacyBehavior?: boolean
+//             onMouseEnter?: React.MouseEventHandler<HTMLAnchorElement>
+//             onTouchStart?: React.TouchEventHandler<HTMLAnchorElement>
+//             onClick?: React.MouseEventHandler<HTMLAnchorElement>
+//             onNavigate?: (event: { preventDefault: () => void }) => void
+//           }
+//         > & {
+//           href: string | url.UrlObject
+//           as?: string | url.UrlObject
+//           replace?: boolean
+//           scroll?: boolean
+//           shallow?: boolean
+//           passHref?: boolean
+//           prefetch?: boolean | null
+//           locale?: string | false
+//           legacyBehavior?: boolean
+//           onMouseEnter?: React.MouseEventHandler<HTMLAnchorElement>
+//           onTouchStart?: React.TouchEventHandler<HTMLAnchorElement>
+//           onClick?: React.MouseEventHandler<HTMLAnchorElement>
+//           onNavigate?: (event: { preventDefault: () => void }) => void
+//         } & {
+//           children?: React.ReactNode | undefined
+//         } & react.RefAttributes<HTMLAnchorElement>,
+//         'ref'
+//       >,
+//       'href'
+//     > & {
+//       href?: (string | url.UrlObject) | undefined
+//     }
+//   >
+// } & {
+//   a: FC<
+//     Omit<
+//       Omit<
+//         Omit<
+//           react.AnchorHTMLAttributes<HTMLAnchorElement>,
+//           keyof {
+//             href: string | url.UrlObject
+//             as?: string | url.UrlObject
+//             replace?: boolean
+//             scroll?: boolean
+//             shallow?: boolean
+//             passHref?: boolean
+//             prefetch?: boolean | null
+//             locale?: string | false
+//             legacyBehavior?: boolean
+//             onMouseEnter?: React.MouseEventHandler<HTMLAnchorElement>
+//             onTouchStart?: React.TouchEventHandler<HTMLAnchorElement>
+//             onClick?: React.MouseEventHandler<HTMLAnchorElement>
+//             onNavigate?: (event: { preventDefault: () => void }) => void
+//           }
+//         > & {
+//           href: string | url.UrlObject
+//           as?: string | url.UrlObject
+//           replace?: boolean
+//           scroll?: boolean
+//           shallow?: boolean
+//           passHref?: boolean
+//           prefetch?: boolean | null
+//           locale?: string | false
+//           legacyBehavior?: boolean
+//           onMouseEnter?: React.MouseEventHandler<HTMLAnchorElement>
+//           onTouchStart?: React.TouchEventHandler<HTMLAnchorElement>
+//           onClick?: React.MouseEventHandler<HTMLAnchorElement>
+//           onNavigate?: (event: { preventDefault: () => void }) => void
+//         } & {
+//           children?: React.ReactNode | undefined
+//         } & react.RefAttributes<HTMLAnchorElement>,
+//         'ref'
+//       >,
+//       'href'
+//     > & {
+//       href?: (string | url.UrlObject) | undefined
+//     }
+//   >
+//   blockquote: react.FunctionComponent<
+//     react.DetailedHTMLProps<
+//       react.BlockquoteHTMLAttributes<HTMLQuoteElement>,
+//       HTMLQuoteElement
+//     >
+//   >
+//   code: FC<
+//     HTMLAttributes<HTMLElement> & {
+//       'data-language'?: string
+//     }
+//   >
+//   details: FC<
+//     react.DetailedHTMLProps<
+//       react.DetailsHTMLAttributes<HTMLDetailsElement>,
+//       HTMLDetailsElement
+//     >
+//   >
+//   h1: FC<
+//     react.DetailedHTMLProps<
+//       HTMLAttributes<HTMLHeadingElement>,
+//       HTMLHeadingElement
+//     >
+//   >
+//   h2: FC<
+//     react.DetailedHTMLProps<
+//       HTMLAttributes<HTMLHeadingElement>,
+//       HTMLHeadingElement
+//     >
+//   >
+//   h3: FC<
+//     react.DetailedHTMLProps<
+//       HTMLAttributes<HTMLHeadingElement>,
+//       HTMLHeadingElement
+//     >
+//   >
+//   h4: FC<
+//     react.DetailedHTMLProps<
+//       HTMLAttributes<HTMLHeadingElement>,
+//       HTMLHeadingElement
+//     >
+//   >
+//   h5: FC<
+//     react.DetailedHTMLProps<
+//       HTMLAttributes<HTMLHeadingElement>,
+//       HTMLHeadingElement
+//     >
+//   >
+//   h6: FC<
+//     react.DetailedHTMLProps<
+//       HTMLAttributes<HTMLHeadingElement>,
+//       HTMLHeadingElement
+//     >
+//   >
+//   hr: (
+//     props: Omit<
+//       react.DetailedHTMLProps<HTMLAttributes<HTMLHRElement>, HTMLHRElement>,
+//       'ref'
+//     >
+//   ) => react_jsx_runtime.JSX.Element
+//   li: (
+//     props: Omit<
+//       react.DetailedHTMLProps<
+//         react.LiHTMLAttributes<HTMLLIElement>,
+//         HTMLLIElement
+//       >,
+//       'ref'
+//     >
+//   ) => react_jsx_runtime.JSX.Element
+//   ol: (
+//     props: Omit<
+//       react.DetailedHTMLProps<
+//         react.OlHTMLAttributes<HTMLOListElement>,
+//         HTMLOListElement
+//       >,
+//       'ref'
+//     >
+//   ) => react_jsx_runtime.JSX.Element
+//   p: (
+//     props: Omit<
+//       react.DetailedHTMLProps<
+//         HTMLAttributes<HTMLParagraphElement>,
+//         HTMLParagraphElement
+//       >,
+//       'ref'
+//     >
+//   ) => react_jsx_runtime.JSX.Element
+//   pre: FC<nextra_mdx_components_pre_index.PreProps>
+//   summary: FC<HTMLAttributes<HTMLElement>>
+//   table: ({
+//     className,
+//     ...props
+//   }: Omit<
+//     react.DetailedHTMLProps<
+//       react.TableHTMLAttributes<HTMLTableElement>,
+//       HTMLTableElement
+//     >,
+//     'ref'
+//   >) => react_jsx_runtime.JSX.Element
+//   td: FC<HTMLAttributes<HTMLTableCellElement>>
+//   th: FC<HTMLAttributes<HTMLTableCellElement>>
+//   tr: FC<HTMLAttributes<HTMLTableRowElement>>
+//   ul: (
+//     props: Omit<
+//       react.DetailedHTMLProps<
+//         HTMLAttributes<HTMLUListElement>,
+//         HTMLUListElement
+//       >,
+//       'ref'
+//     >
+//   ) => react_jsx_runtime.JSX.Element
+//   wrapper({
+//     toc,
+//     children,
+//     metadata,
+//     bottomContent,
+//     ...props
+//   }: {
+//     toc: nextra.Heading[]
+//     children: react.ReactNode
+//     metadata: nextra.$NextraMetadata
+//     bottomContent?: react.ReactNode
+//   }): react_jsx_runtime.JSX.Element
+// }
