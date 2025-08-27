@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "postbuild": "npx pagefind --site .next/server/app --output-path public/_pagefind",
     "dev": "next dev",
     "build_docs": "next build",
     "build": "turbo run build --filter=./packages/\\*",
