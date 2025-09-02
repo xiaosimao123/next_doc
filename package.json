@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "postbuild": "npx pagefind --site .next/server/app --output-path public/_pagefind",
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
     "build_docs": "next build",
     "build": "turbo run build --filter=./packages/\\*",
     "start": "next start",
@@ -13,9 +13,9 @@
   "dependencies": {
     "clsx": "^2.1.0",
     "framer-motion": "^12.0.0",
-    "next": "15.5.0",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
+    "next": "15.5.2",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
     "tsup": "8.4.0",
     "tsx": "4.20.3",
     "nextra": "4.3.0",
